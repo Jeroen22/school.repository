@@ -1,0 +1,90 @@
+html {
+  box-sizing: border-box;
+  height: 100%;
+  background-image: url("../images/starfield.png");
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100%;
+  overflow: hidden;
+  
+}
+
+img {
+  width: 100%;
+  z-index: -1;
+}
+
+
+.finishline {
+  margin-top: -95px;
+  width: 100%;
+  /*essential for determining offset*/
+  height: 10%;
+  
+  /*essential for determining offset*/
+  z-index: 0;
+}
+
+
+.ship {
+  margin: auto;
+  position: absolute;
+  left: 0;
+  bottom: 50px;
+  right: 0;
+  width: 75px;
+  /*essential for determining offset*/
+  height: 75px;
+  /*essential for determining offset*/
+  z-index: 1;
+}
+
+@keyframes beating {
+  to {transform: scale(1.2);}
+}
+
+.asteroid {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  width: 100px;
+  /*essential for determining offset*/
+  height: 100px;
+  /*essential for determining offset*/
+  z-index: 0;
+  /* animation: beating .75s infinite; */
+  /* animation: rotation 2s  linear infinite; */
+}
+
+.timer {
+  position: fixed;
+  margin: 10px;
+  padding: 10px;
+  left: 0;
+  bottom: 0;
+  background-color: red;
+}
+
+.flying{
+  transition: width 5s, height 5s, background-color 3s, transform 2s;  
+}
+
+@keyframes rotation {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(359deg);
+  }
+}
