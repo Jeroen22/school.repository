@@ -57,7 +57,7 @@ var Asteroid = (function (_super) {
     function Asteroid(name, id, xPosition, yPosition, asteroidSize) {
         if (xPosition === void 0) { xPosition = 0; }
         if (yPosition === void 0) { yPosition = 0; }
-        if (asteroidSize === void 0) { asteroidSize = AsteroidSize.large; }
+        if (asteroidSize === void 0) { asteroidSize = AsteroidSize.small; }
         var _this = _super.call(this, name, xPosition, yPosition) || this;
         _this._id = id;
         _this._size = asteroidSize;

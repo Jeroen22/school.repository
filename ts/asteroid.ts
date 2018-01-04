@@ -9,9 +9,9 @@ enum AsteroidSize {
 
 class Asteroid extends GameItem {
     private _id: number;
-    public _size: AsteroidSize;
+    private _size: AsteroidSize;
 
-    constructor(name: string, id: number,  xPosition: number = 0, yPosition: number = 0, asteroidSize: AsteroidSize = AsteroidSize.large) {
+    constructor(name: string, id: number,  xPosition: number = 0, yPosition: number = 0, asteroidSize: AsteroidSize = AsteroidSize.small) {
         super(name, xPosition, yPosition);
         this._id = id;
         this._size = asteroidSize;
