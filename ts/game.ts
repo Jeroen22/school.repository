@@ -13,7 +13,7 @@ class Game {
         this._ship = new Character('ship');
         this._timer = new Timer('timer');
         this._finishline = new Finishline('finishline');
-        this._asteroid[0] = new Asteroid('asteroid', 1, 300, 400);
+        this._asteroid[0] = new Asteroid('asteroid', 1, 300, 400, AsteroidSize.large);
         this._asteroid[1] = new Asteroid('asteroid',1, -600, 200);
         this._asteroid[2] = new Asteroid('asteroid', 1, -220, 250);
         this._asteroid[3] = new Asteroid('asteroid', 1, 600, 200);
@@ -32,12 +32,9 @@ class Game {
         this._ship.draw(this._element);
         this._timer.draw(this._element);
         this._finishline.draw(this._element);
-        this._asteroid[0].draw(this._element);  
-        this._asteroid[1].draw(this._element); 
-        this._asteroid[2].draw(this._element); 
-        this._asteroid[3].draw(this._element); 
-        this._asteroid[4].draw(this._element); 
-        this._asteroid[5].draw(this._element);      
+        for (let index = 0; index < this._asteroid.length; index++) {
+            this._asteroid[index].draw(this._element)
+        }    
     }
 
     //writing elements tot the DOM/HTML
@@ -46,13 +43,9 @@ class Game {
         this._ship.render();
         this._timer.render();
         this._finishline.render();
-        this._asteroid[0].render();
-        this._asteroid[1].render();
-        this._asteroid[2].render();
-        this._asteroid[3].render();
-        this._asteroid[4].render();
-        this._asteroid[5].render();
-        
+        for (let index = 0; index < this._asteroid.length; index++) {
+            this._asteroid[index].render()
+        }
     }
 
     //event handling

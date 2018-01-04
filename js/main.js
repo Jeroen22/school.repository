@@ -45,13 +45,22 @@ var GameItem = (function () {
     };
     return GameItem;
 }());
+var AsteroidSize;
+(function (AsteroidSize) {
+    AsteroidSize[AsteroidSize["small"] = 0] = "small";
+    AsteroidSize[AsteroidSize["medium"] = 1] = "medium";
+    AsteroidSize[AsteroidSize["large"] = 2] = "large";
+})(AsteroidSize || (AsteroidSize = {}));
+;
 var Asteroid = (function (_super) {
     __extends(Asteroid, _super);
-    function Asteroid(name, id, xPosition, yPosition) {
+    function Asteroid(name, id, xPosition, yPosition, asteroidSize) {
         if (xPosition === void 0) { xPosition = 0; }
         if (yPosition === void 0) { yPosition = 0; }
+        if (asteroidSize === void 0) { asteroidSize = AsteroidSize.large; }
         var _this = _super.call(this, name, xPosition, yPosition) || this;
         _this._id = id;
+        _this._size = asteroidSize;
         return _this;
     }
     Asteroid.prototype.remove = function (container) {
@@ -123,7 +132,7 @@ var Game = (function () {
         this._ship = new Character('ship');
         this._timer = new Timer('timer');
         this._finishline = new Finishline('finishline');
-        this._asteroid[0] = new Asteroid('asteroid', 1, 300, 400);
+        this._asteroid[0] = new Asteroid('asteroid', 1, 300, 400, AsteroidSize.large);
         this._asteroid[1] = new Asteroid('asteroid', 1, -600, 200);
         this._asteroid[2] = new Asteroid('asteroid', 1, -220, 250);
         this._asteroid[3] = new Asteroid('asteroid', 1, 600, 200);
@@ -136,24 +145,18 @@ var Game = (function () {
         this._ship.draw(this._element);
         this._timer.draw(this._element);
         this._finishline.draw(this._element);
-        this._asteroid[0].draw(this._element);
-        this._asteroid[1].draw(this._element);
-        this._asteroid[2].draw(this._element);
-        this._asteroid[3].draw(this._element);
-        this._asteroid[4].draw(this._element);
-        this._asteroid[5].draw(this._element);
+        for (var index = 0; index < this._asteroid.length; index++) {
+            this._asteroid[index].draw(this._element);
+        }
     };
     Game.prototype.render = function () {
         this.collision();
         this._ship.render();
         this._timer.render();
         this._finishline.render();
-        this._asteroid[0].render();
-        this._asteroid[1].render();
-        this._asteroid[2].render();
-        this._asteroid[3].render();
-        this._asteroid[4].render();
-        this._asteroid[5].render();
+        for (var index = 0; index < this._asteroid.length; index++) {
+            this._asteroid[index].render();
+        }
     };
     Game.prototype.collision = function () {
         var finishRect = document.getElementById('finishline').getBoundingClientRect();
