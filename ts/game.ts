@@ -32,7 +32,12 @@ class Game {
         this._ship.draw(this._element);
         this._timer.draw(this._element);
         this._finishline.draw(this._element);
-        this._asteroid.draw(this._element);       
+        this._asteroid[0].draw(this._element);  
+        this._asteroid[1].draw(this._element); 
+        this._asteroid[2].draw(this._element); 
+        this._asteroid[3].draw(this._element); 
+        this._asteroid[4].draw(this._element); 
+        this._asteroid[5].draw(this._element);      
     }
 
     //writing elements tot the DOM/HTML
@@ -41,7 +46,12 @@ class Game {
         this._ship.render();
         this._timer.render();
         this._finishline.render();
-        this._asteroid.render();
+        this._asteroid[0].render();
+        this._asteroid[1].render();
+        this._asteroid[2].render();
+        this._asteroid[3].render();
+        this._asteroid[4].render();
+        this._asteroid[5].render();
         
     }
 
