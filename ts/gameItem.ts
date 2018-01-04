@@ -28,6 +28,7 @@ class GameItem {
     //writing elements tot the DOM/HTML
     public render(): void {
         this._element.style.transform = `translate(${this._xPos}px, ${this._yPos}px)`;
+        
     }
 
     public draw(container: HTMLElement): void {

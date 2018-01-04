@@ -13,12 +13,12 @@ class Game {
         this._ship = new Character('ship');
         this._timer = new Timer('timer');
         this._finishline = new Finishline('finishline');
-        this._asteroid[0] = new Asteroid('asteroid', 1, 300, 400, AsteroidSize.large);
-        this._asteroid[1] = new Asteroid('asteroid',1, -600, 200);
-        this._asteroid[2] = new Asteroid('asteroid', 1, -220, 250);
-        this._asteroid[3] = new Asteroid('asteroid', 1, 600, 200);
-        this._asteroid[4] = new Asteroid('asteroid', 1, 0, 200);
-        this._asteroid[5] = new Asteroid('asteroid', 1, 350, -50);
+        this._asteroid[0] = new Asteroid( 'asteroid-1', 1, 300, 400);
+        this._asteroid[1] = new Asteroid( 'asteroid-2', 2, -600, 200);
+        this._asteroid[2] = new Asteroid( 'asteroid-3', 3, -220, 250);
+        this._asteroid[3] = new Asteroid( 'asteroid-4', 4, 500, 200);
+        this._asteroid[4] = new Asteroid( 'asteroid-5', 5, 0, 200);
+        this._asteroid[5] = new Asteroid( 'asteroid-6', 6, 350, 50);
 
         //add keydown handler to the window object
         window.addEventListener('keydown', this.keyDownHandler);
@@ -35,6 +35,7 @@ class Game {
         for (let index = 0; index < this._asteroid.length; index++) {
             this._asteroid[index].draw(this._element)
         }    
+        
     }
 
     //writing elements tot the DOM/HTML
@@ -79,23 +80,37 @@ class Game {
         //use elem.getBoundingClientRect() for getting the right coordinates and measurements of the element
         const finishRect = document.getElementById('finishline').getBoundingClientRect();
         const shipRect = document.getElementById('ship').getBoundingClientRect();
-        // const asteroidtRect = document.getElementById('asteroid').getBoundingClientRect();
+        const asteroidtRect = document.getElementById('asteroid-1').getBoundingClientRect();
 
-        // if (asteroidtRect.bottom || asteroidtRect.top || asteroidtRect.left || asteroidtRect.right >= rocketRect.bottom || rocketRect.top || rocketRect.left || rocketRect.right) {
-        //     this._rocket.xPos = 0;
-        //     this._rocket.yPos = 0;
-        //     console.log('collision');
-        // } else {
-        //     console.log('no collision');
-        // }
+        if (asteroidtRect.bottom <=shipRect.top) {
+            console.log('collision');
+        } else {
+            console.log('no collision');
+        }
 
+        console.log(shipRect.bottom)
+        console.log(asteroidtRect.bottom)
+        console.log(shipRect.left)
+        console.log(asteroidtRect.left)
 
-        // if (finishRect.bottom >= rocketRect.bottom) {
+        // console.log(finishRect.bottom);
+
+        // if (shipRect.bottom < 8.662498474121094) {
         //     // this._timer.addScore();
         //     window.removeEventListener('keydown', this.keyDownHandler);
-        //     console.log('collision');
+        //     console.log('collision with finish');
         // } else {
-        //     console.log('no collision');
+        //     console.log('no collision with finish');
         // }
+        
     }
+
+  /**
+  * Game loop 60 frames per seconds
+  */
+  private loop = () => {
+    this.collision();
+    this.render();
+    requestAnimationFrame(this.loop)
+  }
 }

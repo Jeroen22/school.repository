@@ -50,7 +50,7 @@ img {
   to {transform: scale(1.2);}
 }
 
-.asteroid {
+.asteroid-1, .asteroid-2, .asteroid-3 , .asteroid-4, .asteroid-5, .asteroid-6{
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
@@ -58,9 +58,9 @@ img {
   left: 0;
   top: 0;
   right: 0;
-  width: 100px;
+  width: 200px;
   /*essential for determining offset*/
-  height: 100px;
+  height: 200px;
   /*essential for determining offset*/
   z-index: 0;
   /* animation: beating .75s infinite; */

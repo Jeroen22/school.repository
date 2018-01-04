@@ -45,22 +45,13 @@ var GameItem = (function () {
     };
     return GameItem;
 }());
-var AsteroidSize;
-(function (AsteroidSize) {
-    AsteroidSize[AsteroidSize["small"] = 0] = "small";
-    AsteroidSize[AsteroidSize["medium"] = 1] = "medium";
-    AsteroidSize[AsteroidSize["large"] = 2] = "large";
-})(AsteroidSize || (AsteroidSize = {}));
-;
 var Asteroid = (function (_super) {
     __extends(Asteroid, _super);
-    function Asteroid(name, id, xPosition, yPosition, asteroidSize) {
+    function Asteroid(name, id, xPosition, yPosition) {
         if (xPosition === void 0) { xPosition = 0; }
         if (yPosition === void 0) { yPosition = 0; }
-        if (asteroidSize === void 0) { asteroidSize = AsteroidSize.small; }
         var _this = _super.call(this, name, xPosition, yPosition) || this;
         _this._id = id;
-        _this._size = asteroidSize;
         return _this;
     }
     Asteroid.prototype.remove = function (container) {
@@ -129,15 +120,20 @@ var Game = (function () {
                 _this.render();
             }
         };
+        this.loop = function () {
+            _this.collision();
+            _this.render();
+            requestAnimationFrame(_this.loop);
+        };
         this._ship = new Character('ship');
         this._timer = new Timer('timer');
         this._finishline = new Finishline('finishline');
-        this._asteroid[0] = new Asteroid('asteroid', 1, 300, 400, AsteroidSize.large);
-        this._asteroid[1] = new Asteroid('asteroid', 1, -600, 200);
-        this._asteroid[2] = new Asteroid('asteroid', 1, -220, 250);
-        this._asteroid[3] = new Asteroid('asteroid', 1, 600, 200);
-        this._asteroid[4] = new Asteroid('asteroid', 1, 0, 200);
-        this._asteroid[5] = new Asteroid('asteroid', 1, 350, -50);
+        this._asteroid[0] = new Asteroid('asteroid-1', 1, 300, 400);
+        this._asteroid[1] = new Asteroid('asteroid-2', 2, -600, 200);
+        this._asteroid[2] = new Asteroid('asteroid-3', 3, -220, 250);
+        this._asteroid[3] = new Asteroid('asteroid-4', 4, 500, 200);
+        this._asteroid[4] = new Asteroid('asteroid-5', 5, 0, 200);
+        this._asteroid[5] = new Asteroid('asteroid-6', 6, 350, 50);
         window.addEventListener('keydown', this.keyDownHandler);
         this.draw();
     }
@@ -161,6 +157,17 @@ var Game = (function () {
     Game.prototype.collision = function () {
         var finishRect = document.getElementById('finishline').getBoundingClientRect();
         var shipRect = document.getElementById('ship').getBoundingClientRect();
+        var asteroidtRect = document.getElementById('asteroid-1').getBoundingClientRect();
+        if (asteroidtRect.bottom <= shipRect.top) {
+            console.log('collision');
+        }
+        else {
+            console.log('no collision');
+        }
+        console.log(shipRect.bottom);
+        console.log(asteroidtRect.bottom);
+        console.log(shipRect.left);
+        console.log(asteroidtRect.left);
     };
     return Game;
 }());
