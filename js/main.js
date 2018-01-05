@@ -132,8 +132,10 @@ var Game = (function () {
         this._asteroid[1] = new Asteroid('asteroid-2', 2, -600, 200);
         this._asteroid[2] = new Asteroid('asteroid-3', 3, -220, 250);
         this._asteroid[3] = new Asteroid('asteroid-4', 4, 500, 200);
-        this._asteroid[4] = new Asteroid('asteroid-5', 5, 0, 200);
-        this._asteroid[5] = new Asteroid('asteroid-6', 6, 350, 50);
+        this._asteroid[4] = new Asteroid('asteroid-5', 5, 100, 200);
+        this._asteroid[5] = new Asteroid('asteroid-6', 6, 350, -100);
+        this._asteroid[6] = new Asteroid('asteroid-7', 7, 150, -100);
+        this._asteroid[7] = new Asteroid('asteroid-8', 8, 500, -500);
         window.addEventListener('keydown', this.keyDownHandler);
         this.draw();
     }
@@ -158,16 +160,13 @@ var Game = (function () {
         var finishRect = document.getElementById('finishline').getBoundingClientRect();
         var shipRect = document.getElementById('ship').getBoundingClientRect();
         var asteroidtRect = document.getElementById('asteroid-1').getBoundingClientRect();
-        if (asteroidtRect.bottom <= shipRect.top) {
-            console.log('collision');
+        if (shipRect.bottom < 8.662498474121094) {
+            window.removeEventListener('keydown', this.keyDownHandler);
+            console.log('collision with finish');
         }
         else {
-            console.log('no collision');
+            console.log('no collision with finish');
         }
-        console.log(shipRect.bottom);
-        console.log(asteroidtRect.bottom);
-        console.log(shipRect.left);
-        console.log(asteroidtRect.left);
     };
     return Game;
 }());
