@@ -2,7 +2,7 @@
 
 class Timer extends GameItem {
     private _time: number;
-    private _started: boolean;
+    private _started: boolean = false;
     private _start: number;
     
 
@@ -12,16 +12,21 @@ class Timer extends GameItem {
        
     }
 
+    public timer(): number {
+        this._time += 1;
+        return this.time;
+    }
+
     public get time(): number {
         return this._time;
     }
 
     public start(): void {
-        this._started = true;
+        this._started = false;
     }
 
     public stop(): void {
-        this._started = false;
+        this._started = true;
     }
 
     
@@ -33,7 +38,7 @@ class Timer extends GameItem {
 
         //create p
         const p = document.createElement('p');
-        p.innerHTML = 'The score is: ';
+        p.innerHTML = 'Your time: ';
 
         //create span
         const span = document.createElement('span');

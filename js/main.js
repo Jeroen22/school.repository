@@ -181,9 +181,14 @@ var Timer = (function (_super) {
     __extends(Timer, _super);
     function Timer(name) {
         var _this = _super.call(this, name) || this;
+        _this._started = false;
         _this._time = 0;
         return _this;
     }
+    Timer.prototype.timer = function () {
+        this._time += 1;
+        return this.time;
+    };
     Object.defineProperty(Timer.prototype, "time", {
         get: function () {
             return this._time;
@@ -192,17 +197,17 @@ var Timer = (function (_super) {
         configurable: true
     });
     Timer.prototype.start = function () {
-        this._started = true;
+        this._started = false;
     };
     Timer.prototype.stop = function () {
-        this._started = false;
+        this._started = true;
     };
     Timer.prototype.draw = function (container) {
         this._element = document.createElement('div');
         this._element.className = this._name;
         this._element.id = this._name;
         var p = document.createElement('p');
-        p.innerHTML = 'The score is: ';
+        p.innerHTML = 'Your time: ';
         var span = document.createElement('span');
         span.innerHTML = this._time.toString();
         p.appendChild(span);
