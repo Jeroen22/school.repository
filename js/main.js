@@ -54,10 +54,6 @@ var Asteroid = (function (_super) {
         _this._id = id;
         return _this;
     }
-    Asteroid.prototype.remove = function (container) {
-        var elem = document.getElementById(this._name + "-" + this._id);
-        container.removeChild(elem);
-    };
     return Asteroid;
 }(GameItem));
 var Character = (function (_super) {
@@ -77,6 +73,34 @@ var Character = (function (_super) {
     };
     return Character;
 }(GameItem));
+var Events = (function () {
+    function Events() {
+    }
+    Events.on = function (eventName, fn) {
+        Events.topics[eventName] = Events.topics[eventName] || [];
+        Events.topics[eventName].push(fn);
+    };
+    Events.off = function (eventName, fn) {
+        if (this.topics[eventName]) {
+            for (var i = 0; i < this.topics[eventName].length; i++) {
+                if (this.topics[eventName][i] === fn) {
+                    this.topics[eventName].splice(i, 1);
+                    break;
+                }
+            }
+            ;
+        }
+    };
+    Events.trigger = function (eventName, data) {
+        if (Events.topics[eventName]) {
+            Events.topics[eventName].forEach(function (fn) {
+                fn(data);
+            });
+        }
+    };
+    Events.topics = {};
+    return Events;
+}());
 var Finishline = (function (_super) {
     __extends(Finishline, _super);
     function Finishline(name) {
@@ -125,6 +149,11 @@ var Game = (function () {
             _this.render();
             requestAnimationFrame(_this.loop);
         };
+        this.startHandler = function (e) {
+            Events.trigger('keydown', { temp: 'someInformation' });
+            _this._timer.start();
+            _this.loop();
+        };
         this._ship = new Character('ship');
         this._timer = new Timer('timer');
         this._finishline = new Finishline('finishline');
@@ -161,6 +190,7 @@ var Game = (function () {
         var shipRect = document.getElementById('ship').getBoundingClientRect();
         var asteroidtRect = document.getElementById('asteroid-1').getBoundingClientRect();
         if (shipRect.bottom < 8.662498474121094) {
+            this._timer.stop();
             window.removeEventListener('keydown', this.keyDownHandler);
             console.log('collision with finish');
         }
@@ -183,6 +213,7 @@ var Timer = (function (_super) {
         var _this = _super.call(this, name) || this;
         _this._started = false;
         _this._time = 0;
+        Events.on('keydown', function () { return _this.start(); });
         return _this;
     }
     Timer.prototype.timer = function () {
@@ -197,10 +228,12 @@ var Timer = (function (_super) {
         configurable: true
     });
     Timer.prototype.start = function () {
-        this._started = false;
+        this._started = true;
+        console.log("Start timer");
     };
     Timer.prototype.stop = function () {
-        this._started = true;
+        this._started = false;
+        console.log("Stop timer");
     };
     Timer.prototype.draw = function (container) {
         this._element = document.createElement('div');

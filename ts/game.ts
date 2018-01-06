@@ -98,7 +98,7 @@ class Game {
         // console.log(finishRect.bottom);
 
         if (shipRect.bottom < 8.662498474121094) {
-            // this._timer.addScore();
+             this._timer.stop();
             window.removeEventListener('keydown', this.keyDownHandler);
             console.log('collision with finish');
         } else {
@@ -113,6 +113,13 @@ class Game {
   private loop = () => {
     this.collision();
     this.render();
-    requestAnimationFrame(this.loop)
+    requestAnimationFrame(this.loop);
   }
+
+  private startHandler = (e : Event)=>{
+    Events.trigger('keydown', {temp:'someInformation'});
+    //this._scoreboard.resetScore(0); //without pub sub system
+    this._timer.start(); //maybe own class.
+    this.loop(); //call the gameloop
+}
 }

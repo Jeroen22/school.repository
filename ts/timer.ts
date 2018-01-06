@@ -9,6 +9,7 @@ class Timer extends GameItem {
     constructor(name: string) {
         super(name);
         this._time = 0;
+        Events.on('keydown', () => this.start());
        
     }
 
@@ -22,11 +23,13 @@ class Timer extends GameItem {
     }
 
     public start(): void {
-        this._started = false;
+        this._started = true;
+        console.log("Start timer")
     }
 
     public stop(): void {
-        this._started = true;
+        this._started = false;
+        console.log("Stop timer")
     }
 
     

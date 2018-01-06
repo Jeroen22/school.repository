@@ -11,9 +11,4 @@ class Asteroid extends GameItem {
         this._id = id;
        
     }
-
-    public remove(container: HTMLElement): void {
-        const elem = document.getElementById(`${this._name}-${this._id}`);
-        container.removeChild(elem);
-    }
 }
