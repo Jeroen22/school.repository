@@ -187,29 +187,13 @@ var Game = (function () {
     Game.prototype.collision = function () {
         var finishRect = document.getElementById('1').getBoundingClientRect();
         var shipRect = document.getElementById('1').getBoundingClientRect();
-        var index;
-        var _idNumber = 1;
-        for (index = 1; index < 11; index++) {
-            var _idName = _idNumber.toString();
-            var asteroidtRect = document.getElementById(_idName).getBoundingClientRect();
-            if (shipRect.right == asteroidtRect.left && shipRect.bottom == asteroidtRect.bottom) {
-                console.log("collision with Asteroid");
-            }
-            else if (shipRect.top >= asteroidtRect.bottom && shipRect.right <= asteroidtRect.left && shipRect.right >= asteroidtRect.left) {
-                console.log("collision with Asteroid");
-            }
-            else {
-                console.log("no collision with Asteroid");
-            }
-            _idNumber++;
-            if (shipRect.bottom < 8.662498474121094) {
-                this._timer.stop();
-                window.removeEventListener('keydown', this.keyDownHandler);
-                console.log('collision with finish');
-            }
-            else {
-                console.log('no collision with finish');
-            }
+        if (shipRect.bottom < 8.662498474121094) {
+            this._timer.stop();
+            window.removeEventListener('keydown', this.keyDownHandler);
+            console.log('collision with finish');
+        }
+        else {
+            console.log('no collision with finish');
         }
     };
     return Game;
@@ -244,8 +228,8 @@ var Timer = (function (_super) {
         configurable: true
     });
     Timer.prototype.start = function () {
-        this._started = true;
         console.log("Start timer");
+        this._started = true;
     };
     Timer.prototype.stop = function () {
         this._started = false;

@@ -23,13 +23,14 @@ class Timer extends GameItem {
     }
 
     public start(): void {
+        console.log("Start timer");
         this._started = true;
-        console.log("Start timer")
+        
     }
 
     public stop(): void {
         this._started = false;
-        console.log("Stop timer")
+        console.log("Stop timer");
     }
 
     
