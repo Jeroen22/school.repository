@@ -9,10 +9,9 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var GameItem = (function () {
-    function GameItem(name, xPosition, yPosition) {
-        if (xPosition === void 0) { xPosition = 0; }
-        if (yPosition === void 0) { yPosition = 0; }
+    function GameItem(name, id, xPosition, yPosition) {
         this._name = name;
+        this._id = id;
         this._xPos = xPosition;
         this._yPos = yPosition;
     }
@@ -36,7 +35,7 @@ var GameItem = (function () {
     GameItem.prototype.draw = function (container) {
         this._element = document.createElement('div');
         this._element.className = this._name;
-        this._element.id = this._name;
+        this._element.id = this._id.toString();
         this._element.style.transform = "translate(" + this._xPos + "px, " + this._yPos + "px)";
         var image = document.createElement('img');
         image.src = "./assets/images/" + this._name + ".png ";
@@ -48,20 +47,16 @@ var GameItem = (function () {
 var Asteroid = (function (_super) {
     __extends(Asteroid, _super);
     function Asteroid(name, id, xPosition, yPosition) {
-        if (xPosition === void 0) { xPosition = 0; }
-        if (yPosition === void 0) { yPosition = 0; }
-        var _this = _super.call(this, name, xPosition, yPosition) || this;
-        _this._id = id;
-        return _this;
+        return _super.call(this, name, id, xPosition, yPosition) || this;
     }
     return Asteroid;
 }(GameItem));
 var Character = (function (_super) {
     __extends(Character, _super);
-    function Character(name, xPosition, yPosition) {
+    function Character(name, id, xPosition, yPosition) {
         if (xPosition === void 0) { xPosition = 0; }
         if (yPosition === void 0) { yPosition = 0; }
-        return _super.call(this, name, xPosition, yPosition) || this;
+        return _super.call(this, name, id, xPosition, yPosition) || this;
     }
     Character.prototype.moveY = function (yPosition) {
         this._yPos -= yPosition;
@@ -103,8 +98,10 @@ var Events = (function () {
 }());
 var Finishline = (function (_super) {
     __extends(Finishline, _super);
-    function Finishline(name) {
-        return _super.call(this, name) || this;
+    function Finishline(name, id, xPosition, yPosition) {
+        if (xPosition === void 0) { xPosition = 0; }
+        if (yPosition === void 0) { yPosition = 0; }
+        return _super.call(this, name, id, xPosition, yPosition) || this;
     }
     Finishline.prototype.draw = function (container) {
         this._element = document.createElement('div');
@@ -154,17 +151,19 @@ var Game = (function () {
             _this._timer.start();
             _this.loop();
         };
-        this._ship = new Character('ship');
-        this._timer = new Timer('timer');
-        this._finishline = new Finishline('finishline');
-        this._asteroid[0] = new Asteroid('asteroid-1', 1, 300, 400);
-        this._asteroid[1] = new Asteroid('asteroid-2', 2, -600, 200);
-        this._asteroid[2] = new Asteroid('asteroid-3', 3, -220, 250);
-        this._asteroid[3] = new Asteroid('asteroid-4', 4, 500, 200);
-        this._asteroid[4] = new Asteroid('asteroid-5', 5, 100, 200);
-        this._asteroid[5] = new Asteroid('asteroid-6', 6, 350, -100);
-        this._asteroid[6] = new Asteroid('asteroid-7', 7, 150, -100);
-        this._asteroid[7] = new Asteroid('asteroid-8', 8, 500, -500);
+        this._ship = new Character('ship', 1);
+        this._timer = new Timer('timer', 1);
+        this._finishline = new Finishline('finishline', 1);
+        this._asteroid[0] = new Asteroid('asteroid-1', 1, 200, 0);
+        this._asteroid[1] = new Asteroid('asteroid-2', 2, 300, -150);
+        this._asteroid[2] = new Asteroid('asteroid-3', 3, -100, -50);
+        this._asteroid[3] = new Asteroid('asteroid-4', 4, 150, 0);
+        this._asteroid[4] = new Asteroid('asteroid-5', 5, 75, 250);
+        this._asteroid[5] = new Asteroid('asteroid-6', 6, 400, 300);
+        this._asteroid[6] = new Asteroid('asteroid-7', 7, -250, -600);
+        this._asteroid[7] = new Asteroid('asteroid-8', 8, 400, -50);
+        this._asteroid[8] = new Asteroid('asteroid-9', 9, 700, 100);
+        this._asteroid[9] = new Asteroid('asteroid-10', 10, -800, -100);
         window.addEventListener('keydown', this.keyDownHandler);
         this.draw();
     }
@@ -186,16 +185,31 @@ var Game = (function () {
         }
     };
     Game.prototype.collision = function () {
-        var finishRect = document.getElementById('finishline').getBoundingClientRect();
-        var shipRect = document.getElementById('ship').getBoundingClientRect();
-        var asteroidtRect = document.getElementById('asteroid-1').getBoundingClientRect();
-        if (shipRect.bottom < 8.662498474121094) {
-            this._timer.stop();
-            window.removeEventListener('keydown', this.keyDownHandler);
-            console.log('collision with finish');
-        }
-        else {
-            console.log('no collision with finish');
+        var finishRect = document.getElementById('1').getBoundingClientRect();
+        var shipRect = document.getElementById('1').getBoundingClientRect();
+        var index;
+        var _idNumber = 1;
+        for (index = 1; index < 11; index++) {
+            var _idName = _idNumber.toString();
+            var asteroidtRect = document.getElementById(_idName).getBoundingClientRect();
+            if (shipRect.right == asteroidtRect.left && shipRect.bottom == asteroidtRect.bottom) {
+                console.log("collision with Asteroid");
+            }
+            else if (shipRect.top >= asteroidtRect.bottom && shipRect.right <= asteroidtRect.left && shipRect.right >= asteroidtRect.left) {
+                console.log("collision with Asteroid");
+            }
+            else {
+                console.log("no collision with Asteroid");
+            }
+            _idNumber++;
+            if (shipRect.bottom < 8.662498474121094) {
+                this._timer.stop();
+                window.removeEventListener('keydown', this.keyDownHandler);
+                console.log('collision with finish');
+            }
+            else {
+                console.log('no collision with finish');
+            }
         }
     };
     return Game;
@@ -209,8 +223,10 @@ var app;
 })();
 var Timer = (function (_super) {
     __extends(Timer, _super);
-    function Timer(name) {
-        var _this = _super.call(this, name) || this;
+    function Timer(name, id, xPosition, yPosition) {
+        if (xPosition === void 0) { xPosition = 0; }
+        if (yPosition === void 0) { yPosition = 0; }
+        var _this = _super.call(this, name, id, xPosition, yPosition) || this;
         _this._started = false;
         _this._time = 0;
         Events.on('startPosition', function () { return _this.start(); });

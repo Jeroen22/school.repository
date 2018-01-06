@@ -50,7 +50,7 @@ img {
   to {transform: scale(1.2);}
 }
 
-.asteroid-1, .asteroid-2, .asteroid-3 , .asteroid-4, .asteroid-5, .asteroid-6{
+.asteroid-1 .asteroid-2, .asteroid-3 , .asteroid-4, .asteroid-5, .asteroid-6, .asteroid-7, .asteroid-8, .asteroid-9, .asteroid-10 {
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
@@ -58,13 +58,18 @@ img {
   left: 0;
   top: 0;
   right: 0;
-  width: 200px;
+  width: 300px;
   /*essential for determining offset*/
-  height: 200px;
+  height: 300px;
   /*essential for determining offset*/
   z-index: 0;
   /* animation: beating .75s infinite; */
   /* animation: rotation 2s  linear infinite; */
+}
+
+.asteroid-1 {
+  width: 300px;
+  height: 300px;
 }
 
 .asteroid-2 {
@@ -83,8 +88,8 @@ img {
 }
 
 .asteroid-5 {
-  width: 350px;
-  height: 350px;
+  width: 250px;
+  height: 250px;
 }
 
 .asteroid-6 {
@@ -100,6 +105,14 @@ img {
 .asteroid-8 {
   width: 375px;
   height: 375px;
+}
+.asteroid-9 {
+  width: 375px;
+  height: 375px;
+}
+.asteroid-10 {
+  width: 1000px;
+  height: 1000px;
 }
 
 .timer {

@@ -6,8 +6,8 @@ class Timer extends GameItem {
     private _start: number;
     
 
-    constructor(name: string) {
-        super(name);
+    constructor(name: string,id: number, xPosition: number = 0, yPosition: number = 0) {
+        super(name,id, xPosition, yPosition);
         this._time = 0;
         Events.on('startPosition', () => this.start());
        

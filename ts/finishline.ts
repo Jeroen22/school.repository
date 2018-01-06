@@ -3,8 +3,8 @@
 class Finishline extends GameItem {
 
    
-    constructor(name: string) {
-        super(name);
+    constructor(name: string,id: number, xPosition: number = 0, yPosition: number = 0) {
+        super(name,id, xPosition, yPosition);
     }
 
     public draw(container: HTMLElement): void {

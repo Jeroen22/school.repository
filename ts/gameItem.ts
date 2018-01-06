@@ -3,12 +3,14 @@ class GameItem {
     //fields/attributes
     protected _element: HTMLElement;
     protected _name: string;
+    protected _id: number;
     protected _xPos: number;
     protected _yPos: number;
     
 
-    constructor(name: string, xPosition: number = 0, yPosition: number = 0) {
-        this._name = name
+    constructor(name: string, id: number, xPosition: number, yPosition: number) {
+        this._name = name;
+        this._id = id;
         this._xPos = xPosition;
         this._yPos = yPosition;
     }
@@ -35,7 +37,7 @@ class GameItem {
         //create div
         this._element = document.createElement('div');
         this._element.className = this._name;
-        this._element.id = this._name;
+        this._element.id = this._id.toString();
         this._element.style.transform = `translate(${this._xPos}px, ${this._yPos}px)`;
 
         //create image
@@ -44,6 +46,7 @@ class GameItem {
 
         //append elements
         this._element.appendChild(image);
-        container.appendChild(this._element);
-    }   
+        container.appendChild(this._element);  
+        }
+     
 }

@@ -10,17 +10,19 @@ class Game {
 
     constructor() {
         //create some gameItems
-        this._ship = new Character('ship');
-        this._timer = new Timer('timer');
-        this._finishline = new Finishline('finishline');
-        this._asteroid[0] = new Asteroid( 'asteroid-1', 1, 300, 400);
-        this._asteroid[1] = new Asteroid( 'asteroid-2', 2, -600, 200);
-        this._asteroid[2] = new Asteroid( 'asteroid-3', 3, -220, 250);
-        this._asteroid[3] = new Asteroid( 'asteroid-4', 4, 500, 200);
-        this._asteroid[4] = new Asteroid( 'asteroid-5', 5, 100, 200);
-        this._asteroid[5] = new Asteroid( 'asteroid-6', 6, 350, -100);
-        this._asteroid[6] = new Asteroid( 'asteroid-7', 7, 150, -100);
-        this._asteroid[7] = new Asteroid( 'asteroid-8', 8, 500, -500);
+        this._ship = new Character('ship', 1);
+        this._timer = new Timer('timer', 1);
+        this._finishline = new Finishline('finishline', 1);
+        this._asteroid[0] = new Asteroid( 'asteroid-1', 1, 200, 0);
+        this._asteroid[1] = new Asteroid( 'asteroid-2', 2, 300, -150);
+        this._asteroid[2] = new Asteroid( 'asteroid-3', 3, -100, -50);
+        this._asteroid[3] = new Asteroid( 'asteroid-4', 4, 150, 0);
+        this._asteroid[4] = new Asteroid( 'asteroid-5', 5, 75, 250);
+        this._asteroid[5] = new Asteroid( 'asteroid-6', 6, 400, 300);
+        this._asteroid[6] = new Asteroid( 'asteroid-7', 7, -250, -600);
+        this._asteroid[7] = new Asteroid( 'asteroid-8', 8, 400, -50);
+        this._asteroid[8] = new Asteroid( 'asteroid-9', 9, 700, 100);
+        this._asteroid[9] = new Asteroid( 'asteroid-10', 10, -800, -100);
 
         //add keydown handler to the window object
         window.addEventListener('keydown', this.keyDownHandler);
@@ -80,9 +82,25 @@ class Game {
     //detect collision between two objects
     public collision(): void {
         //use elem.getBoundingClientRect() for getting the right coordinates and measurements of the element
-        const finishRect = document.getElementById('finishline').getBoundingClientRect();
-        const shipRect = document.getElementById('ship').getBoundingClientRect();
-        const asteroidtRect = document.getElementById('asteroid-1').getBoundingClientRect();
+        const finishRect = document.getElementById('1').getBoundingClientRect();
+        const shipRect = document.getElementById('1').getBoundingClientRect();
+
+        let index: any;
+        let _idNumber: number = 1;
+        for (index = 1; index < 11; index++) {
+            let _idName: string = _idNumber.toString();
+            const asteroidtRect = document.getElementById(_idName).getBoundingClientRect();
+            if (shipRect.right == asteroidtRect.left && shipRect.bottom == asteroidtRect.bottom) {
+                console.log("collision with Asteroid")
+            }
+            else if(shipRect.top >= asteroidtRect.bottom && shipRect.right <= asteroidtRect.left && shipRect.right >= asteroidtRect.left){
+                console.log("collision with Asteroid")
+            } else {
+                console.log("no collision with Asteroid")
+            }
+            _idNumber++;
+
+        // }
 
         // if (asteroidtRect.bottom = shipRect.top) {
         //     console.log('collision');
