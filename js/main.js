@@ -150,7 +150,7 @@ var Game = (function () {
             requestAnimationFrame(_this.loop);
         };
         this.startHandler = function (e) {
-            Events.trigger('keydown', { temp: 'someInformation' });
+            Events.trigger('startPosition', { temp: 'someInformation' });
             _this._timer.start();
             _this.loop();
         };
@@ -213,7 +213,7 @@ var Timer = (function (_super) {
         var _this = _super.call(this, name) || this;
         _this._started = false;
         _this._time = 0;
-        Events.on('keydown', function () { return _this.start(); });
+        Events.on('startPosition', function () { return _this.start(); });
         return _this;
     }
     Timer.prototype.timer = function () {

@@ -9,7 +9,7 @@ class Timer extends GameItem {
     constructor(name: string) {
         super(name);
         this._time = 0;
-        Events.on('keydown', () => this.start());
+        Events.on('startPosition', () => this.start());
        
     }
 

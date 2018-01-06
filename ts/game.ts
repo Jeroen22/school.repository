@@ -117,7 +117,7 @@ class Game {
   }
 
   private startHandler = (e : Event)=>{
-    Events.trigger('keydown', {temp:'someInformation'});
+    Events.trigger('startPosition', {temp:'someInformation'});
     //this._scoreboard.resetScore(0); //without pub sub system
     this._timer.start(); //maybe own class.
     this.loop(); //call the gameloop
