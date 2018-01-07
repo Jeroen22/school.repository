@@ -19,10 +19,9 @@ class Game {
         this._asteroid[3] = new Asteroid('asteroid-4', 4, 150, 0);
         this._asteroid[4] = new Asteroid('asteroid-5', 5, 75, 250);
         this._asteroid[5] = new Asteroid('asteroid-6', 6, 400, 300);
-        this._asteroid[6] = new Asteroid('asteroid-7', 7, -250, -600);
-        this._asteroid[7] = new Asteroid('asteroid-8', 8, 400, -50);
-        this._asteroid[8] = new Asteroid('asteroid-9', 9, 700, 100);
-        this._asteroid[9] = new Asteroid('asteroid-10', 10, -800, -100);
+        this._asteroid[6] = new Asteroid('asteroid-7', 7, 400, -50);
+        this._asteroid[7] = new Asteroid('asteroid-8', 8, 700, 100);
+        this._asteroid[8] = new Asteroid('asteroid-9', 9, -800, -100);
 
         //add keydown handler to the window object
         window.addEventListener('keydown', this.keyDownHandler);
@@ -57,22 +56,22 @@ class Game {
     public keyDownHandler = (e: KeyboardEvent): void => {
         //move up W
         if (e.keyCode === 87) {
-            this._ship.moveY(50)
+            this._ship.moveY(10)
             console.log('up');
             this.render();
         } //move left A
         else if (e.keyCode === 65) {
-            this._ship.moveX(50)
+            this._ship.moveX(10)
             console.log('left');
             this.render();
         } //move down S
         else if (e.keyCode === 83) {
-            this._ship.moveY(-50)
+            this._ship.moveY(-10)
             console.log('down');
             this.render();
         } //move right D
         else if (e.keyCode === 68) {
-            this._ship.moveX(-50)
+            this._ship.moveX(-10)
             console.log('right');
             this.render();
         }
@@ -85,37 +84,117 @@ class Game {
         const finishRect = document.getElementById('1').getBoundingClientRect();
         const shipRect = document.getElementById('1').getBoundingClientRect();
 
+        
+        console.log(shipRect.top)
+        console.log(shipRect.bottom)
+        console.log(shipRect.right)
+        console.log(shipRect.left)
+      
+        //asteroid 1
+        if (shipRect.top <= 283.5 && (shipRect.right >= 277.5 && shipRect.left <= 431.5 && shipRect.bottom >= 143.5)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }  
+        //asteroid 2
+        else if (shipRect.top <= 500 && (shipRect.right >= 395 && shipRect.left <= 618 && shipRect.bottom >= 319)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        } 
+        //asteroid 3
+        else if (shipRect.top <= 198.5 && (shipRect.right >= 595.5 && shipRect.left <= 749.5 && shipRect.bottom >= 57.5)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }  
+        //asteroid 4
+        else if (shipRect.top <= 211.5 && (shipRect.right >= 857.5 && shipRect.left <= 984.5 && shipRect.bottom >= 92.4)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }   
+        //asteroid 5
+        else if (shipRect.top <= 461.4 && (shipRect.right >= 782.5 && shipRect.left <= 910.5 && shipRect.bottom >= 341.4)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }   
+        //asteroid 6
+        else if (shipRect.top <= 688.4 && (shipRect.right >= 1044.5 && shipRect.left <= 1305.5 && shipRect.bottom >= 462.4)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }   
+        //asteroid 7
+        else if (shipRect.top <= 249.5 && (shipRect.right >= 1075.5 && shipRect.left <= 1268.5 && shipRect.bottom >= 77.4)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }  
+        //asteroid 8
+        else if (shipRect.top <= 400.4 && (shipRect.right >= 1365.5 && shipRect.bottom >= 228)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        } 
+        //asteroid 9
+        else if (shipRect.top <= 690 && (shipRect.left <= 244 && shipRect.bottom >= 200.5)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        } 
+        
+
+
+
+//shipRect.bottom < 227.125 &&
+// const asteroid2Rect = document.getElementById('2').getBoundingClientRect();
+    //     let index: any;
+    //     let _asteroidNumber: number = 1;
+    //     for (index = 1; index < 11; index++) {
+    //      let _idName: string = _asteroidNumber.toString();
+    //      const asteroid2Rect = document.getElementById('1').getBoundingClientRect();
+    //      if (shipRect.top > index.top && shipRect.bottom > index.bottom) {
+    //         if (shipRect.top < index.bottom && shipRect.bottom > index.top) {
+    //             if (shipRect.left > index.left && shipRect.right > index.right && shipRect.left < index.right) {
+    //                 console.log("collision with Asteroid")
+    //             }
+    //             else if (shipRect.left < index.left && shipRect.right < index.right && shipRect.right > index.left) {
+    //                 console.log("collision with Asteroid")
+    //             }
+    //             else if (shipRect.left == index.left && shipRect.right == index.right) {
+    //                 console.log("collision with Asteroid")
+    //             }
+    //         }
+    //         _asteroidNumber++;
+    //     }
+    //  }
+    
+       
         // let index: any;
         // let _idNumber: number = 1;
         // for (index = 1; index < 11; index++) {
         //     let _idName: string = _idNumber.toString();
-        //     const asteroidtRect = document.getElementById(_idName).getBoundingClientRect();
-        //     if (shipRect.right >= asteroidtRect.left && shipRect.bottom <= asteroidtRect.bottom) {
+        //     const asteroid2Rect = document.getElementById(_idName).getBoundingClientRect();
+        //     if (shipRect.right >= asteroid2Rect.left && shipRect.bottom <= asteroid2Rect.bottom) {
         //         console.log("collision with Asteroid")
         //     }
-        //     else if (shipRect.top >= asteroidtRect.bottom && shipRect.right <= asteroidtRect.left && shipRect.right >= asteroidtRect.left) {
+        //     else if (shipRect.top >= asteroid2Rect.bottom && shipRect.right <= asteroid2Rect.left && shipRect.right >= asteroid2Rect.left) {
         //         console.log("collision with Asteroid")
         //     } else {
         //         console.log("no collision with Asteroid")
         //     }
-        //     _idNumber++;
+        //     
 
         // }
 
-        // if (asteroidtRect.bottom = shipRect.top) {
+        // const asteroid2Rect = document.getElementById('1').getBoundingClientRect();
+        // if (asteroid2Rect.bottom >= shipRect.top && asteroid2Rect.right <= shipRect.left) {
         //     console.log('collision');
         // } else {
         //     console.log('no collision');
         // }
 
         // console.log(shipRect.bottom)
-        // console.log(asteroidtRect.bottom)
+        // console.log(asteroid2Rect.bottom)
         // console.log(shipRect.left)
-        // console.log(asteroidtRect.left)
+        // console.log(asteroid2Rect.left)
 
         // console.log(finishRect.bottom);
 
-        if (shipRect.bottom < 8.662498474121094) {
+        if (shipRect.bottom < finishRect.bottom) {
             this._timer.stop();
             window.removeEventListener('keydown', this.keyDownHandler);
             console.log('collision with finish');

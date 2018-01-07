@@ -60,11 +60,9 @@ var Character = (function (_super) {
     }
     Character.prototype.moveY = function (yPosition) {
         this._yPos -= yPosition;
-        this._element.classList.add('flying');
     };
     Character.prototype.moveX = function (xPosition) {
         this._xPos -= xPosition;
-        this._element.classList.add('flying');
     };
     return Character;
 }(GameItem));
@@ -121,22 +119,22 @@ var Game = (function () {
         this._asteroid = new Array();
         this.keyDownHandler = function (e) {
             if (e.keyCode === 87) {
-                _this._ship.moveY(50);
+                _this._ship.moveY(10);
                 console.log('up');
                 _this.render();
             }
             else if (e.keyCode === 65) {
-                _this._ship.moveX(50);
+                _this._ship.moveX(10);
                 console.log('left');
                 _this.render();
             }
             else if (e.keyCode === 83) {
-                _this._ship.moveY(-50);
+                _this._ship.moveY(-10);
                 console.log('down');
                 _this.render();
             }
             else if (e.keyCode === 68) {
-                _this._ship.moveX(-50);
+                _this._ship.moveX(-10);
                 console.log('right');
                 _this.render();
             }
@@ -160,10 +158,9 @@ var Game = (function () {
         this._asteroid[3] = new Asteroid('asteroid-4', 4, 150, 0);
         this._asteroid[4] = new Asteroid('asteroid-5', 5, 75, 250);
         this._asteroid[5] = new Asteroid('asteroid-6', 6, 400, 300);
-        this._asteroid[6] = new Asteroid('asteroid-7', 7, -250, -600);
-        this._asteroid[7] = new Asteroid('asteroid-8', 8, 400, -50);
-        this._asteroid[8] = new Asteroid('asteroid-9', 9, 700, 100);
-        this._asteroid[9] = new Asteroid('asteroid-10', 10, -800, -100);
+        this._asteroid[6] = new Asteroid('asteroid-7', 7, 400, -50);
+        this._asteroid[7] = new Asteroid('asteroid-8', 8, 700, 100);
+        this._asteroid[8] = new Asteroid('asteroid-9', 9, -800, -100);
         window.addEventListener('keydown', this.keyDownHandler);
         this.draw();
     }
@@ -187,7 +184,47 @@ var Game = (function () {
     Game.prototype.collision = function () {
         var finishRect = document.getElementById('1').getBoundingClientRect();
         var shipRect = document.getElementById('1').getBoundingClientRect();
-        if (shipRect.bottom < 8.662498474121094) {
+        console.log(shipRect.top);
+        console.log(shipRect.bottom);
+        console.log(shipRect.right);
+        console.log(shipRect.left);
+        if (shipRect.top <= 283.5 && (shipRect.right >= 277.5 && shipRect.left <= 431.5 && shipRect.bottom >= 143.5)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }
+        else if (shipRect.top <= 500 && (shipRect.right >= 395 && shipRect.left <= 618 && shipRect.bottom >= 319)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }
+        else if (shipRect.top <= 198.5 && (shipRect.right >= 595.5 && shipRect.left <= 749.5 && shipRect.bottom >= 57.5)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }
+        else if (shipRect.top <= 211.5 && (shipRect.right >= 857.5 && shipRect.left <= 984.5 && shipRect.bottom >= 92.4)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }
+        else if (shipRect.top <= 461.4 && (shipRect.right >= 782.5 && shipRect.left <= 910.5 && shipRect.bottom >= 341.4)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }
+        else if (shipRect.top <= 688.4 && (shipRect.right >= 1044.5 && shipRect.left <= 1305.5 && shipRect.bottom >= 462.4)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }
+        else if (shipRect.top <= 249.5 && (shipRect.right >= 1075.5 && shipRect.left <= 1268.5 && shipRect.bottom >= 77.4)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }
+        else if (shipRect.top <= 400.4 && (shipRect.right >= 1365.5 && shipRect.bottom >= 228)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }
+        else if (shipRect.top <= 690 && (shipRect.left <= 244 && shipRect.bottom >= 200.5)) {
+            this._ship.xPos = 0;
+            this._ship.yPos = 0;
+        }
+        if (shipRect.bottom < finishRect.bottom) {
             this._timer.stop();
             window.removeEventListener('keydown', this.keyDownHandler);
             console.log('collision with finish');
