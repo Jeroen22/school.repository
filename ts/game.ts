@@ -10,9 +10,9 @@ class Game {
 
     constructor() {
         //create some gameItems
-        this._ship = new Character('ship', 1);
-        this._timer = new Timer('timer', 1);
-        this._finishline = new Finishline('finishline', 1);
+        this._ship = new Character('ship', 10);
+        this._timer = new Timer('timer', 11);
+        this._finishline = new Finishline('finishline', 12);
         this._asteroid[0] = new Asteroid('asteroid-1', 1, 200, 0);
         this._asteroid[1] = new Asteroid('asteroid-2', 2, 300, -150);
         this._asteroid[2] = new Asteroid('asteroid-3', 3, -100, -50);
@@ -81,15 +81,9 @@ class Game {
     //detect collision between two objects
     public collision(): void {
         //use elem.getBoundingClientRect() for getting the right coordinates and measurements of the element
-        const finishRect = document.getElementById('1').getBoundingClientRect();
-        const shipRect = document.getElementById('1').getBoundingClientRect();
+        const shipRect = document.getElementById('10').getBoundingClientRect();
+        console.log(shipRect.top);
 
-        
-        console.log(shipRect.top)
-        console.log(shipRect.bottom)
-        console.log(shipRect.right)
-        console.log(shipRect.left)
-      
         //asteroid 1
         if (shipRect.top <= 283.5 && (shipRect.right >= 277.5 && shipRect.left <= 431.5 && shipRect.bottom >= 143.5)) {
             this._ship.xPos = 0;
@@ -136,65 +130,8 @@ class Game {
             this._ship.yPos = 0;
         } 
         
-
-
-
-//shipRect.bottom < 227.125 &&
-// const asteroid2Rect = document.getElementById('2').getBoundingClientRect();
-    //     let index: any;
-    //     let _asteroidNumber: number = 1;
-    //     for (index = 1; index < 11; index++) {
-    //      let _idName: string = _asteroidNumber.toString();
-    //      const asteroid2Rect = document.getElementById('1').getBoundingClientRect();
-    //      if (shipRect.top > index.top && shipRect.bottom > index.bottom) {
-    //         if (shipRect.top < index.bottom && shipRect.bottom > index.top) {
-    //             if (shipRect.left > index.left && shipRect.right > index.right && shipRect.left < index.right) {
-    //                 console.log("collision with Asteroid")
-    //             }
-    //             else if (shipRect.left < index.left && shipRect.right < index.right && shipRect.right > index.left) {
-    //                 console.log("collision with Asteroid")
-    //             }
-    //             else if (shipRect.left == index.left && shipRect.right == index.right) {
-    //                 console.log("collision with Asteroid")
-    //             }
-    //         }
-    //         _asteroidNumber++;
-    //     }
-    //  }
-    
-       
-        // let index: any;
-        // let _idNumber: number = 1;
-        // for (index = 1; index < 11; index++) {
-        //     let _idName: string = _idNumber.toString();
-        //     const asteroid2Rect = document.getElementById(_idName).getBoundingClientRect();
-        //     if (shipRect.right >= asteroid2Rect.left && shipRect.bottom <= asteroid2Rect.bottom) {
-        //         console.log("collision with Asteroid")
-        //     }
-        //     else if (shipRect.top >= asteroid2Rect.bottom && shipRect.right <= asteroid2Rect.left && shipRect.right >= asteroid2Rect.left) {
-        //         console.log("collision with Asteroid")
-        //     } else {
-        //         console.log("no collision with Asteroid")
-        //     }
-        //     
-
-        // }
-
-        // const asteroid2Rect = document.getElementById('1').getBoundingClientRect();
-        // if (asteroid2Rect.bottom >= shipRect.top && asteroid2Rect.right <= shipRect.left) {
-        //     console.log('collision');
-        // } else {
-        //     console.log('no collision');
-        // }
-
-        // console.log(shipRect.bottom)
-        // console.log(asteroid2Rect.bottom)
-        // console.log(shipRect.left)
-        // console.log(asteroid2Rect.left)
-
-        // console.log(finishRect.bottom);
-
-        if (shipRect.bottom < finishRect.bottom) {
+        //finish
+        if (shipRect.top < -10) {
             this._timer.stop();
             window.removeEventListener('keydown', this.keyDownHandler);
             console.log('collision with finish');

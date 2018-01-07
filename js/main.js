@@ -149,9 +149,9 @@ var Game = (function () {
             _this._timer.start();
             _this.loop();
         };
-        this._ship = new Character('ship', 1);
-        this._timer = new Timer('timer', 1);
-        this._finishline = new Finishline('finishline', 1);
+        this._ship = new Character('ship', 10);
+        this._timer = new Timer('timer', 11);
+        this._finishline = new Finishline('finishline', 12);
         this._asteroid[0] = new Asteroid('asteroid-1', 1, 200, 0);
         this._asteroid[1] = new Asteroid('asteroid-2', 2, 300, -150);
         this._asteroid[2] = new Asteroid('asteroid-3', 3, -100, -50);
@@ -182,12 +182,8 @@ var Game = (function () {
         }
     };
     Game.prototype.collision = function () {
-        var finishRect = document.getElementById('1').getBoundingClientRect();
-        var shipRect = document.getElementById('1').getBoundingClientRect();
+        var shipRect = document.getElementById('10').getBoundingClientRect();
         console.log(shipRect.top);
-        console.log(shipRect.bottom);
-        console.log(shipRect.right);
-        console.log(shipRect.left);
         if (shipRect.top <= 283.5 && (shipRect.right >= 277.5 && shipRect.left <= 431.5 && shipRect.bottom >= 143.5)) {
             this._ship.xPos = 0;
             this._ship.yPos = 0;
@@ -224,7 +220,7 @@ var Game = (function () {
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
-        if (shipRect.bottom < finishRect.bottom) {
+        if (shipRect.top < -10) {
             this._timer.stop();
             window.removeEventListener('keydown', this.keyDownHandler);
             console.log('collision with finish');
