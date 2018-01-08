@@ -70,42 +70,12 @@ var Character = (function (_super) {
     }
     Character.prototype.moveY = function (yPosition) {
         this._yPos -= yPosition;
-        this._element.classList.add('flying');
     };
     Character.prototype.moveX = function (xPosition) {
         this._xPos -= xPosition;
-        this._element.classList.add('flying');
     };
     return Character;
 }(GameItem));
-var Events = (function () {
-    function Events() {
-    }
-    Events.on = function (eventName, fn) {
-        Events.topics[eventName] = Events.topics[eventName] || [];
-        Events.topics[eventName].push(fn);
-    };
-    Events.off = function (eventName, fn) {
-        if (this.topics[eventName]) {
-            for (var i = 0; i < this.topics[eventName].length; i++) {
-                if (this.topics[eventName][i] === fn) {
-                    this.topics[eventName].splice(i, 1);
-                    break;
-                }
-            }
-            ;
-        }
-    };
-    Events.trigger = function (eventName, data) {
-        if (Events.topics[eventName]) {
-            Events.topics[eventName].forEach(function (fn) {
-                fn(data);
-            });
-        }
-    };
-    Events.topics = {};
-    return Events;
-}());
 var Finishline = (function (_super) {
     __extends(Finishline, _super);
     function Finishline(name, id, xPosition, yPosition) {
@@ -121,9 +91,10 @@ var Game = (function () {
         this._element = document.getElementById('container');
         this._asteroid = new Array();
         this.keyDownHandler = function (e) {
-            Events.trigger('keydown', { temp: 'someInformation' });
-            _this._timer.start();
-            _this.loop();
+            if (_this._timer.doesntRun()) {
+                console.log("Starting the timer");
+                _this._timer.startTime();
+            }
             if (e.keyCode === 87) {
                 _this._ship.moveY(50);
                 console.log('up');
@@ -185,43 +156,52 @@ var Game = (function () {
     Game.prototype.collision = function () {
         var shipRect = document.getElementById('10').getBoundingClientRect();
         if (shipRect.top <= 283.5 && shipRect.right >= 277.5 && shipRect.left <= 431.5 && shipRect.bottom >= 143.5) {
+            console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         else if (shipRect.top <= 500 && shipRect.right >= 395 && shipRect.left <= 618 && shipRect.bottom >= 319) {
+            console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         else if (shipRect.top <= 198.5 && shipRect.right >= 595.5 && shipRect.left <= 749.5 && shipRect.bottom >= 57.5) {
+            console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         else if (shipRect.top <= 211.5 && shipRect.right >= 857.5 && shipRect.left <= 984.5 && shipRect.bottom >= 92.4) {
+            console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         else if (shipRect.top <= 461.4 && shipRect.right >= 782.5 && shipRect.left <= 910.5 && shipRect.bottom >= 341.4) {
+            console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         else if (shipRect.top <= 688.4 && shipRect.right >= 1044.5 && shipRect.left <= 1305.5 && shipRect.bottom >= 462.4) {
+            console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         else if (shipRect.top <= 249.5 && shipRect.right >= 1075.5 && shipRect.left <= 1268.5 && shipRect.bottom >= 77.4) {
+            console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         else if (shipRect.top <= 400.4 && shipRect.right >= 1365.5 && shipRect.bottom >= 228) {
+            console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         else if (shipRect.top <= 690 && shipRect.left <= 244 && shipRect.bottom >= 200.5) {
+            console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
-        if (shipRect.top < -10) {
-            this._timer.stop();
+        if (shipRect.top < 10) {
+            this._timer.stopTimer();
             window.removeEventListener('keydown', this.keyDownHandler);
             console.log('collision with finish');
         }
@@ -244,34 +224,36 @@ var Timer = (function (_super) {
         if (xPosition === void 0) { xPosition = 0; }
         if (yPosition === void 0) { yPosition = 0; }
         var _this = _super.call(this, name, id, xPosition, yPosition) || this;
-        _this._started = false;
         _this._time = 0;
-        Events.on('keydown', function () { return _this.start(); });
+        _this._started = false;
+        _this.interval = function () {
+            console.log("interval");
+            _this._time += 1;
+            console.log(_this._time);
+            _this.render();
+            if (_this._started)
+                setTimeout(_this.interval, 1000);
+        };
+        _this._time = 0;
+        console.log("create a new timer");
         return _this;
     }
-    Timer.prototype.timer = function () {
-        this._time += 1;
-        return this.time;
-    };
-    Object.defineProperty(Timer.prototype, "time", {
-        get: function () {
-            return this._time;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Timer.prototype.start = function () {
+    Timer.prototype.startTime = function () {
         console.log("Start timer");
         this._started = true;
+        setTimeout(this.interval, 1000);
     };
-    Timer.prototype.stop = function () {
+    Timer.prototype.stopTimer = function () {
         this._started = false;
         console.log("Stop timer");
+    };
+    Timer.prototype.doesntRun = function () {
+        return !this._started;
     };
     Timer.prototype.draw = function (container) {
         this._element = document.createElement('div');
         this._element.className = this._name;
-        this._element.id = this._name;
+        this._element.id = this._id.toString();
         var p = document.createElement('p');
         p.innerHTML = 'Your time: ';
         var span = document.createElement('span');
@@ -281,8 +263,9 @@ var Timer = (function (_super) {
         container.appendChild(this._element);
     };
     Timer.prototype.render = function () {
-        var scoreSpan = this._element.childNodes[0].childNodes[1];
-        scoreSpan.innerHTML = this._time.toString();
+        var timeSpan = this._element;
+        timeSpan.innerHTML = 'Your time: ' + this._time.toString();
+        console.log(this);
     };
     return Timer;
 }(GameItem));
