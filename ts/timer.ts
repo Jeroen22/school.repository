@@ -4,7 +4,6 @@ class Timer extends GameItem {
     //fields
     private _time: number = 0;
     private _started: boolean = false;
-    private _start: number;
 
     //constructor
     constructor(name: string, id: number, xPosition: number = 0, yPosition: number = 0) {
@@ -20,7 +19,7 @@ class Timer extends GameItem {
         setTimeout(this.interval, 1000);
     }
 
-    interval = () => {
+    public interval = () => {
         console.log("interval");
         this._time += 1;
         console.log(this._time);
