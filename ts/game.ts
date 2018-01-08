@@ -144,13 +144,10 @@ class Game {
         }
     }
 
-    /**
-    * Game loop 60 frames per seconds
-    */
+    //Game loop 60 frames per seconds 
     private loop = () => {
         this.collision();
         this.render();
         requestAnimationFrame(this.loop);
-        console.log("hoi")
     }
 }

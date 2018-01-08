@@ -46,6 +46,15 @@ img {
   to {transform: scale(1.2);}
 }
 
+@keyframes rotation {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(359deg);
+  }
+}
+
 .asteroid-1 .asteroid-2, .asteroid-3 , .asteroid-4, .asteroid-5, .asteroid-6, .asteroid-7, .asteroid-8, .asteroid-9, .asteroid-10 {
   margin-left: auto;
   margin-right: auto;
@@ -113,17 +122,9 @@ img {
   left: 0;
   bottom: 0;
   background-color: grey;
+  border-radius: 10%;
 }
 
 .flying{
-  transition: width 5s, height 5s, background-color 3s, transform 2s;  
-}
-
-@keyframes rotation {
-  from {
-      transform: rotate(0deg);
-  }
-  to {
-      transform: rotate(359deg);
-  }
+   transition: width 5s, height 5s, background-color 3s, transform 2s;  
 }

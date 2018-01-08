@@ -7,6 +7,7 @@ class GameItem {
     protected _xPos: number;
     protected _yPos: number;
     
+    //constructor
     constructor(name: string, id: number, xPosition: number, yPosition: number) {
         this._name = name;
         this._id = id;

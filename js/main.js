@@ -149,7 +149,6 @@ var Game = (function () {
             _this.collision();
             _this.render();
             requestAnimationFrame(_this.loop);
-            console.log("hoi");
         };
         this._ship = new Character('ship', 10);
         this._timer = new Timer('timer', 11);

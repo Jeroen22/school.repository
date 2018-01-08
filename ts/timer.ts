@@ -1,16 +1,19 @@
 /// <reference path="gameItem.ts" />
 
 class Timer extends GameItem {
+    //fields
     private _time: number;
     private _started: boolean = false;
     private _start: number;
     
+    //constructor
     constructor(name: string,id: number, xPosition: number = 0, yPosition: number = 0) {
         super(name,id, xPosition, yPosition);
         this._time = 0;
         Events.on('keydown', () => this.start());
     }
 
+    //methods
     public timer(): number {
         this._time += 1;
         return this.time;

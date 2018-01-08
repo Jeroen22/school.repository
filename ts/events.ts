@@ -1,15 +1,16 @@
 class Events{
-
+    //fields
     static topics : any = {};
     
-    constructor(){} //
+    //cosntructor
+    constructor(){} 
     static on(eventName : string, fn : Function) {
         Events.topics[eventName] = Events.topics[eventName] || [];
         Events.topics[eventName].push(fn);
     }
 
+    //methods
     static off(eventName : string, fn : Function) {
-
         if (this.topics[eventName]) {
             for (var i = 0; i < this.topics[eventName].length; i++) {
                 if (this.topics[eventName][i] === fn) {
