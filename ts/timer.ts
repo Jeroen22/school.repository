@@ -5,12 +5,10 @@ class Timer extends GameItem {
     private _started: boolean = false;
     private _start: number;
     
-
     constructor(name: string,id: number, xPosition: number = 0, yPosition: number = 0) {
         super(name,id, xPosition, yPosition);
         this._time = 0;
-        Events.on('startPosition', () => this.start());
-       
+        Events.on('keydown', () => this.start());
     }
 
     public timer(): number {
@@ -33,7 +31,6 @@ class Timer extends GameItem {
         console.log("Stop timer");
     }
 
-    
     public draw(container: HTMLElement): void {
         //create div
         this._element = document.createElement('div');
@@ -54,7 +51,6 @@ class Timer extends GameItem {
         container.appendChild(this._element);
     }
 
-
     //update the state of the Scoreboard in the DOM
     public render(): void {
         //get the contents of span
@@ -65,5 +61,4 @@ class Timer extends GameItem {
     // public addTime(): void {
     //     this._time += 1;
     // }
-
 }

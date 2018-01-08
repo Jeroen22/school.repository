@@ -60,9 +60,11 @@ var Character = (function (_super) {
     }
     Character.prototype.moveY = function (yPosition) {
         this._yPos -= yPosition;
+        this._element.classList.add('flying');
     };
     Character.prototype.moveX = function (xPosition) {
         this._xPos -= xPosition;
+        this._element.classList.add('flying');
     };
     return Character;
 }(GameItem));
@@ -101,15 +103,6 @@ var Finishline = (function (_super) {
         if (yPosition === void 0) { yPosition = 0; }
         return _super.call(this, name, id, xPosition, yPosition) || this;
     }
-    Finishline.prototype.draw = function (container) {
-        this._element = document.createElement('div');
-        this._element.className = this._name;
-        this._element.id = this._name;
-        var image = document.createElement('img');
-        image.src = "./assets/images/" + this._name + ".png ";
-        this._element.appendChild(image);
-        container.appendChild(this._element);
-    };
     return Finishline;
 }(GameItem));
 var Game = (function () {
@@ -118,23 +111,26 @@ var Game = (function () {
         this._element = document.getElementById('container');
         this._asteroid = new Array();
         this.keyDownHandler = function (e) {
+            Events.trigger('keydown', { temp: 'someInformation' });
+            _this._timer.start();
+            _this.loop();
             if (e.keyCode === 87) {
-                _this._ship.moveY(10);
+                _this._ship.moveY(50);
                 console.log('up');
                 _this.render();
             }
             else if (e.keyCode === 65) {
-                _this._ship.moveX(10);
+                _this._ship.moveX(50);
                 console.log('left');
                 _this.render();
             }
             else if (e.keyCode === 83) {
-                _this._ship.moveY(-10);
+                _this._ship.moveY(-50);
                 console.log('down');
                 _this.render();
             }
             else if (e.keyCode === 68) {
-                _this._ship.moveX(-10);
+                _this._ship.moveX(-50);
                 console.log('right');
                 _this.render();
             }
@@ -143,11 +139,7 @@ var Game = (function () {
             _this.collision();
             _this.render();
             requestAnimationFrame(_this.loop);
-        };
-        this.startHandler = function (e) {
-            Events.trigger('startPosition', { temp: 'someInformation' });
-            _this._timer.start();
-            _this.loop();
+            console.log("hoi");
         };
         this._ship = new Character('ship', 10);
         this._timer = new Timer('timer', 11);
@@ -183,40 +175,39 @@ var Game = (function () {
     };
     Game.prototype.collision = function () {
         var shipRect = document.getElementById('10').getBoundingClientRect();
-        console.log(shipRect.top);
-        if (shipRect.top <= 283.5 && (shipRect.right >= 277.5 && shipRect.left <= 431.5 && shipRect.bottom >= 143.5)) {
+        if (shipRect.top <= 283.5 && shipRect.right >= 277.5 && shipRect.left <= 431.5 && shipRect.bottom >= 143.5) {
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
-        else if (shipRect.top <= 500 && (shipRect.right >= 395 && shipRect.left <= 618 && shipRect.bottom >= 319)) {
+        else if (shipRect.top <= 500 && shipRect.right >= 395 && shipRect.left <= 618 && shipRect.bottom >= 319) {
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
-        else if (shipRect.top <= 198.5 && (shipRect.right >= 595.5 && shipRect.left <= 749.5 && shipRect.bottom >= 57.5)) {
+        else if (shipRect.top <= 198.5 && shipRect.right >= 595.5 && shipRect.left <= 749.5 && shipRect.bottom >= 57.5) {
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
-        else if (shipRect.top <= 211.5 && (shipRect.right >= 857.5 && shipRect.left <= 984.5 && shipRect.bottom >= 92.4)) {
+        else if (shipRect.top <= 211.5 && shipRect.right >= 857.5 && shipRect.left <= 984.5 && shipRect.bottom >= 92.4) {
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
-        else if (shipRect.top <= 461.4 && (shipRect.right >= 782.5 && shipRect.left <= 910.5 && shipRect.bottom >= 341.4)) {
+        else if (shipRect.top <= 461.4 && shipRect.right >= 782.5 && shipRect.left <= 910.5 && shipRect.bottom >= 341.4) {
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
-        else if (shipRect.top <= 688.4 && (shipRect.right >= 1044.5 && shipRect.left <= 1305.5 && shipRect.bottom >= 462.4)) {
+        else if (shipRect.top <= 688.4 && shipRect.right >= 1044.5 && shipRect.left <= 1305.5 && shipRect.bottom >= 462.4) {
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
-        else if (shipRect.top <= 249.5 && (shipRect.right >= 1075.5 && shipRect.left <= 1268.5 && shipRect.bottom >= 77.4)) {
+        else if (shipRect.top <= 249.5 && shipRect.right >= 1075.5 && shipRect.left <= 1268.5 && shipRect.bottom >= 77.4) {
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
-        else if (shipRect.top <= 400.4 && (shipRect.right >= 1365.5 && shipRect.bottom >= 228)) {
+        else if (shipRect.top <= 400.4 && shipRect.right >= 1365.5 && shipRect.bottom >= 228) {
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
-        else if (shipRect.top <= 690 && (shipRect.left <= 244 && shipRect.bottom >= 200.5)) {
+        else if (shipRect.top <= 690 && shipRect.left <= 244 && shipRect.bottom >= 200.5) {
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
@@ -246,7 +237,7 @@ var Timer = (function (_super) {
         var _this = _super.call(this, name, id, xPosition, yPosition) || this;
         _this._started = false;
         _this._time = 0;
-        Events.on('startPosition', function () { return _this.start(); });
+        Events.on('keydown', function () { return _this.start(); });
         return _this;
     }
     Timer.prototype.timer = function () {

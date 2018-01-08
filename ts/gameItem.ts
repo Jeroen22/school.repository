@@ -7,7 +7,6 @@ class GameItem {
     protected _xPos: number;
     protected _yPos: number;
     
-
     constructor(name: string, id: number, xPosition: number, yPosition: number) {
         this._name = name;
         this._id = id;
@@ -15,9 +14,7 @@ class GameItem {
         this._yPos = yPosition;
     }
 
-
     //methods
-
     //setters
     public set xPos(xPosition: number) {
         this._xPos = xPosition;
@@ -47,6 +44,5 @@ class GameItem {
         //append elements
         this._element.appendChild(image);
         container.appendChild(this._element);  
-        }
-     
+        }    
 }

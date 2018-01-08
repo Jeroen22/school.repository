@@ -8,11 +8,11 @@ class Character extends GameItem {
 
     public moveY(yPosition: number): void {
         this._yPos -= yPosition;
-        //this._element.classList.add('flying');
+        this._element.classList.add('flying');
     }
 
     public moveX(xPosition: number): void {
         this._xPos -= xPosition;
-        //this._element.classList.add('flying');
+        this._element.classList.add('flying');
     }
 }

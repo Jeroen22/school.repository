@@ -21,17 +21,14 @@ img {
   z-index: -1;
 }
 
-
 .finishline {
   margin-top: -95px;
   width: 100%;
   /*essential for determining offset*/
   height: 10%;
-  
   /*essential for determining offset*/
   z-index: 0;
 }
-
 
 .ship {
   margin: auto;
@@ -116,7 +113,7 @@ img {
   padding: 10px;
   left: 0;
   bottom: 0;
-  background-color: red;
+  background-color: grey;
 }
 
 .flying{
