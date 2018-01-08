@@ -42,6 +42,16 @@ var GameItem = (function () {
         this._element.appendChild(image);
         container.appendChild(this._element);
     };
+    GameItem.prototype.drawAsteroids = function (container) {
+        this._element = document.createElement('div');
+        this._element.className = this._name;
+        this._element.id = this._id.toString();
+        this._element.style.transform = "translate(" + this._xPos + "px, " + this._yPos + "px)";
+        var image = document.createElement('img');
+        image.src = "./assets/images/asteroids/" + this._name + ".png ";
+        this._element.appendChild(image);
+        container.appendChild(this._element);
+    };
     return GameItem;
 }());
 var Asteroid = (function (_super) {
@@ -161,7 +171,7 @@ var Game = (function () {
         this._timer.draw(this._element);
         this._finishline.draw(this._element);
         for (var index = 0; index < this._asteroid.length; index++) {
-            this._asteroid[index].draw(this._element);
+            this._asteroid[index].drawAsteroids(this._element);
         }
     };
     Game.prototype.render = function () {

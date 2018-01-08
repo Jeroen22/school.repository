@@ -36,7 +36,7 @@ class Game {
         this._timer.draw(this._element);
         this._finishline.draw(this._element);
         for (let index = 0; index < this._asteroid.length; index++) {
-            this._asteroid[index].draw(this._element)
+            this._asteroid[index].drawAsteroids(this._element)
         }
 
     }
