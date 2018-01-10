@@ -10,10 +10,12 @@ class Character extends GameItem {
     //move the ship up or down (vertically)
     public moveY(yPosition: number): void {
         this._yPos -= yPosition;
+        this._element.classList.add('flying');
     }
 
     //move the ship right or left (horizontally)
     public moveX(xPosition: number): void {
         this._xPos -= xPosition;
+        this._element.classList.add('flying');
     }
 }

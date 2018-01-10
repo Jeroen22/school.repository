@@ -28,6 +28,9 @@ class Game {
 
         //draw is initial state
         this.draw();
+
+        //start the loop
+        this.loop();
     }
 
     //methods

@@ -109,3 +109,7 @@ img {
   background-color: grey;
   border-radius: 10%;
 }
+
+.flying{
+  transition: width 2s, height 2s, background-color 2s, transform 2s;  
+}
