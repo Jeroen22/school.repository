@@ -70,9 +70,11 @@ var Character = (function (_super) {
     }
     Character.prototype.moveY = function (yPosition) {
         this._yPos -= yPosition;
+        this._element.classList.add('flying');
     };
     Character.prototype.moveX = function (xPosition) {
         this._xPos -= xPosition;
+        this._element.classList.add('flying');
     };
     return Character;
 }(GameItem));
@@ -135,6 +137,7 @@ var Game = (function () {
         this._asteroid[8] = new Asteroid('asteroid-9', 9, -800, -100);
         window.addEventListener('keydown', this.keyDownHandler);
         this.draw();
+        this.loop();
     }
     Game.prototype.draw = function () {
         this._ship.draw(this._element);
