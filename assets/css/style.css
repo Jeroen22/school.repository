@@ -113,3 +113,13 @@ img {
 .flying{
   transition: width 2s, height 2s, background-color 2s, transform 2s;  
 }
+
+.start{
+  position: fixed;
+  margin: 10px;
+  padding: 10px;
+  left: 0;
+  bottom: 0;
+  background-color: grey;
+  border-radius: 10%;
+}

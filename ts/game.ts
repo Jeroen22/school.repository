@@ -4,6 +4,7 @@ class Game {
     private _element: HTMLElement = document.getElementById('container');
     private _ship: Character;
     private _timer: Timer;
+    private _restart: Timer;
     private _finishline: Finishline;
     private _asteroid: Array<Asteroid> = new Array(); //use an array if you have multiple gameItems of the same sort
 
@@ -12,6 +13,7 @@ class Game {
         //create some gameItems
         this._ship = new Character('ship', 10);
         this._timer = new Timer('timer', 11);
+        this._restart = new Timer('restart', 13, 1450, 700);
         this._finishline = new Finishline('finishline', 12);
         this._asteroid[0] = new Asteroid('asteroid-1', 1, 200, 0);
         this._asteroid[1] = new Asteroid('asteroid-2', 2, 300, -150);
@@ -37,6 +39,7 @@ class Game {
     private draw(): void {
         this._ship.draw(this._element);
         this._timer.draw(this._element);
+        this._restart.drawRestart(this._element);
         this._finishline.draw(this._element);
         for (let index = 0; index < this._asteroid.length; index++) {
             this._asteroid[index].drawAsteroids(this._element)
@@ -91,62 +94,62 @@ class Game {
         const shipRect = document.getElementById('10').getBoundingClientRect();
         
         //asteroid 1
-        if (shipRect.top <= 283.5 && shipRect.right >= 277.5 && shipRect.left <= 431.5 && shipRect.bottom >= 143.5) {
+        if (shipRect.top <= 308 && shipRect.right >= 274.5 && shipRect.left <= 432.5 && shipRect.bottom >= 168) {
             console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         //asteroid 2
-        else if (shipRect.top <= 500 && shipRect.right >= 395 && shipRect.left <= 618 && shipRect.bottom >= 319) {
+        else if (shipRect.top <= 530 && shipRect.right >= 401.5 && shipRect.left <= 609.5 && shipRect.bottom >= 345) {
             console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         //asteroid 3
-        else if (shipRect.top <= 198.5 && shipRect.right >= 595.5 && shipRect.left <= 749.5 && shipRect.bottom >= 57.5) {
+        else if (shipRect.top <= 227 && shipRect.right >= 593.5 && shipRect.left <= 750.5 && shipRect.bottom >= 85) {
           console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         //asteroid 4
-        else if (shipRect.top <= 211.5 && shipRect.right >= 857.5 && shipRect.left <= 984.5 && shipRect.bottom >= 92.4) {
+        else if (shipRect.top <= 211 && shipRect.right >= 857.5 && shipRect.left <= 985.5 && shipRect.bottom >= 92) {
             console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         //asteroid 5
-        else if (shipRect.top <= 461.4 && shipRect.right >= 782.5 && shipRect.left <= 910.5 && shipRect.bottom >= 341.4) {
+        else if (shipRect.top <= 463 && shipRect.right >= 781.5 && shipRect.left <= 910.5 && shipRect.bottom >= 342) {
             console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         //asteroid 6
-        else if (shipRect.top <= 688.4 && shipRect.right >= 1044.5 && shipRect.left <= 1305.5 && shipRect.bottom >= 462.4) {
+        else if (shipRect.top <= 690 && shipRect.right >= 1044.5 && shipRect.left <= 1270.5 && shipRect.bottom >= 462) {
             console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         //asteroid 7
-        else if (shipRect.top <= 249.5 && shipRect.right >= 1075.5 && shipRect.left <= 1268.5 && shipRect.bottom >= 77.4) {
+        else if (shipRect.top <= 250 && shipRect.right >= 1075.5 && shipRect.left <= 1270.5 && shipRect.bottom >= 76) {
             console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         //asteroid 8
-        else if (shipRect.top <= 400.4 && shipRect.right >= 1365.5 && shipRect.bottom >= 228) {
+        else if (shipRect.top <= 399 && shipRect.right >= 1304.5 && shipRect.bottom >= 226) {
             console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
         //asteroid 9
-        else if (shipRect.top <= 690 && shipRect.left <= 244 && shipRect.bottom >= 200.5) {
+        else if (shipRect.top <= 620 && shipRect.left <= 244.5 && shipRect.bottom >= 203) {
             console.log('collision with Asteroid');
             this._ship.xPos = 0;
             this._ship.yPos = 0;
         }
 
         //finish
-        if (shipRect.top < 10) {
+        if (shipRect.top < 55) {
             this._timer.stopTimer();
             window.removeEventListener('keydown', this.keyDownHandler);
             console.log('collision with finish');
