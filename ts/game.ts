@@ -17,7 +17,7 @@ class Game {
         this._finishline = new Finishline('finishline', 12);
         this._asteroid[0] = new Asteroid('asteroid-1', 1, 200, 0);
         this._asteroid[1] = new Asteroid('asteroid-2', 2, 300, -150);
-        this._asteroid[2] = new Asteroid('asteroid-3', 3, -100, -50);
+        this._asteroid[2] = new Asteroid('asteroid-3', 3, -100, -20);
         this._asteroid[3] = new Asteroid('asteroid-4', 4, 150, 0);
         this._asteroid[4] = new Asteroid('asteroid-5', 5, 75, 250);
         this._asteroid[5] = new Asteroid('asteroid-6', 6, 400, 300);
