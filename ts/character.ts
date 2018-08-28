@@ -14,6 +14,7 @@ class Character extends GameItem {
     }
 
     //move the ship right or left (horizontally)
+    //comment for CIN
     public moveX(xPosition: number): void {
         this._xPos -= xPosition;
         this._element.classList.add('flying');
