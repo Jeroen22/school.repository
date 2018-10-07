@@ -30,6 +30,7 @@ class GameItem {
         this._element.style.transform = `translate(${this._xPos}px, ${this._yPos}px)`;
     }
 
+    //Creates te elements
     public draw(container: HTMLElement): void {
         //create div
         this._element = document.createElement('div');
@@ -46,6 +47,7 @@ class GameItem {
         container.appendChild(this._element);
     }
 
+    //draws the asteroids
     public drawAsteroids(container: HTMLElement): void {
         //create div
         this._element = document.createElement('div');
