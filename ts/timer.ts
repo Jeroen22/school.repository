@@ -87,6 +87,7 @@ class Timer extends GameItem {
         console.log(this);
     }
 
+    //makes an event start
     private startHandler = (e : Event)=>{
         location.reload();
     }
