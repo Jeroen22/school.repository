@@ -19,6 +19,7 @@ class Timer extends GameItem {
         setTimeout(this.interval, 1000);
     }
 
+    //sets the interval
     public interval = () => {
         console.log("interval");
         this._time += 1;
