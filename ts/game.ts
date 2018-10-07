@@ -28,7 +28,7 @@ class Game {
         //add keydown handler to the window object
         window.addEventListener('keydown', this.keyDownHandler);
 
-        //draw is initial state
+        //draw is an initial state
         this.draw();
 
         //start the loop
